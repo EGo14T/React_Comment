@@ -1,0 +1,83 @@
+{
+    "data": [
+        {
+            "replyComments": {
+                "id": "116925611598946304",
+                "createTime": "2021-01-29 15:40:38",
+                "updateTime": null,
+                "showId": "EGobzUjMY3sM3",
+                "fromUserId": "1",
+                "toUserId": null,
+                "toId": "116925549732962304",
+                "content": "ttt[大笑]",
+                "like": 0,
+                "status": 1,
+                "nickname": "昕",
+                "avatar": "https://cdn.ego1st.cn/xinmusic/useravatar/1avatar1611903575341.jpg"
+            },
+            "originComments": {
+                "id": "116925549732962304",
+                "createTime": "2021-01-29 15:40:23",
+                "updateTime": null,
+                "showId": "EGobzUjMY3sM3",
+                "fromUserId": "1",
+                "toUserId": null,
+                "toId": "116925502484127744",
+                "content": "ttt",
+                "like": 0,
+                "status": 1,
+                "nickname": "昕",
+                "avatar": "https://cdn.ego1st.cn/xinmusic/useravatar/1avatar1611903575341.jpg"
+            }
+        },
+        {
+            "replyComments": {
+                "id": "116925549732962304",
+                "createTime": "2021-01-29 15:40:23",
+                "updateTime": null,
+                "showId": "EGobzUjMY3sM3",
+                "fromUserId": "1",
+                "toUserId": null,
+                "toId": "116925502484127744",
+                "content": "ttt",
+                "like": 0,
+                "status": 1,
+                "nickname": "昕",
+                "avatar": "https://cdn.ego1st.cn/xinmusic/useravatar/1avatar1611903575341.jpg"
+            },
+            "originComments": {
+                "id": "116925502484127744",
+                "createTime": "2021-01-29 15:40:12",
+                "updateTime": null,
+                "showId": "EGobzUjMY3sM3",
+                "fromUserId": "1",
+                "toUserId": null,
+                "toId": "",
+                "content": "test",
+                "like": 0,
+                "status": 1,
+                "nickname": "昕",
+                "avatar": "https://cdn.ego1st.cn/xinmusic/useravatar/1avatar1611903575341.jpg"
+            }
+        },
+        {
+            "replyComments": {
+                "id": "116925502484127744",
+                "createTime": "2021-01-29 15:40:12",
+                "updateTime": null,
+                "showId": "EGobzUjMY3sM3",
+                "fromUserId": "1",
+                "toUserId": null,
+                "toId": "",
+                "content": "test",
+                "like": 0,
+                "status": 1,
+                "nickname": "昕",
+                "avatar": "https://cdn.ego1st.cn/xinmusic/useravatar/1avatar1611903575341.jpg"
+            },
+            "originComments": null
+        }
+    ],
+    "code": 200,
+    "message": "success"
+}
