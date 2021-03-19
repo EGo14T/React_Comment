@@ -1,21 +1,80 @@
 import React from 'react';
 import '../style/Comment.scss'
 
+import { postComments, initUserInfo, getUserInfo } from '../apis/api'
+
 class EditComment extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+        }
+    }
+
+    componentDidMount() {
+        this.initUser()
+        //监听message事件
+        window.addEventListener("message", this.postID, false);
+    }
+
+    componentDidUpdate() {
+        
     }
 
     EditComment = () => {
         return (
-            <div className="editArea">
+            <div className="postComment">
                 <div>
-                <textarea rows="3" cols="200" maxlength="10"/>
+                    <textarea className="editArea" rows="6" value={this.state.value} onChange={(event) => { this.updateInputValue(event) }} />
                 </div>
-                {/* <Button type="primary">Primary Button</Button> */}
+                <div className="comentAction">
+                    <input className="commentBtn" type="button" value="评论" onClick={() => this.comment()} />
+                </div>
+
             </div>
         )
+    }
+
+    updateInputValue = (e) => {
+        this.setState({
+            value: e.target.value
+        })
+    }
+
+    comment() {
+        var content = this.state.value
+        var json = {
+            "showId": this.state.showID,
+            "fromUserId": localStorage.getItem("egoUUID"),
+            "content": content
+        }
+
+        postComments(json).then(res => {
+            if(res) {
+                console.log(res);
+            }
+        })
+
+    }
+
+    postID =(e) => {
+        this.setState({"showID": e.data.data})
+    }
+
+    initUser() {
+        var uuid = localStorage.getItem("egoUUID")
+
+        if (uuid) {
+            getUserInfo([uuid]).then(res => {
+                if (res) {
+                    console.log(res.data)
+                }
+            })
+        } else {
+            initUserInfo().then(res => {
+                localStorage.setItem("egoUUID", res.data)
+            })
+
+        }
     }
 
 

@@ -2,14 +2,20 @@ import data from '../public/content.json'
 import React from 'react';
 import '../style/Comment.scss'
 import EditComment from './EditComment'
+import { getComments } from '../apis/api'
 
 class Comment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: data.data
+      content: []
     }
     this.ref = React.createRef();
+  }
+  componentDidMount() {
+    this.getHeight()
+    //console.log(window.parent)
+    this.getComment()
   }
 
   ContentItem = () => {
@@ -21,16 +27,16 @@ class Comment extends React.Component {
         />
         {item.originComments == null &&
           <div className="commentItem">
-            <span className="fromName">{item.replyComments.nickname}：</span>
+            <span className="fromName">{item.replyComments.nickName}：</span>
             <span className="content">{item.replyComments.content}</span>
           </div>
         }
         {item.originComments != null &&
           <div className="commentItem">
-            <span className="fromName">{item.replyComments.nickname}：</span>
+            <span className="fromName">{item.replyComments.nickName}：</span>
             <span className="content">{item.replyComments.content}</span>
             <div className="reply">
-              <span className="fromName">@{item.originComments.nickname}：</span>
+              <span className="fromName">@{item.originComments.nickName}：</span>
               <span className="content">{item.originComments.content}</span>
             </div>
           </div>
@@ -55,15 +61,17 @@ class Comment extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.getHeight()
+  getComment() {
+    getComments(['EGobzUjMY3sM3']).then(data => {
+      this.setState({ content: data.data })
+    })
   }
 
   render() {
     return (
       <div className="container" ref={this.ref}>
         <div className="main">
-          <EditComment/>
+          <EditComment />
           {this.ContentItem()}
         </div>
       </div>

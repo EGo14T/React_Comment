@@ -3,6 +3,8 @@ import axios from "axios"
 //默认超时时间
 axios.defaults.timeout = 30000;
 
+axios.defaults.baseURL = 'http://127.0.0.1:9876'
+
 /**
     * get方法，对应get请求
     * @param {String} url [请求的url地址]
