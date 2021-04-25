@@ -16,10 +16,6 @@ class EditComment extends React.Component {
         window.addEventListener("message", this.postID, false);
     }
 
-    componentDidUpdate() {
-        
-    }
-
     EditComment = () => {
         return (
             <div className="postComment">
@@ -40,24 +36,29 @@ class EditComment extends React.Component {
         })
     }
 
-    comment() {
+    comment = () => {
         var content = this.state.value
-        var json = {
-            "showId": this.state.showID,
-            "fromUserId": localStorage.getItem("egoUUID"),
-            "content": content
-        }
-
-        postComments(json).then(res => {
-            if(res) {
-                console.log(res);
+        var id = this.state.showID
+        if (id != null) {
+            id = id.replace("/", "")
+            var json = {
+                "showId": id,
+                "fromUserId": localStorage.getItem("egoUUID"),
+                "content": content
             }
-        })
 
+            postComments(json).then(res => {
+                if (res) {
+                    this.setState({ value: "" })
+                    this.props.getComment(id)
+                }
+            })
+
+        }
     }
 
-    postID =(e) => {
-        this.setState({"showID": e.data.data})
+    postID = (e) => {
+        this.setState({ "showID": e.data.data })
     }
 
     initUser() {

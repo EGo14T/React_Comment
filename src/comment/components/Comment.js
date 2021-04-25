@@ -15,39 +15,47 @@ class Comment extends React.Component {
   componentDidMount() {
     this.getHeight()
     //console.log(window.parent)
-    this.getComment()
+    window.addEventListener("message", this.postID, false);
+  }
+
+  postID = (e) => {
+    console.log(e.data.data)
+    this.getComment(e.data.data)
   }
 
   ContentItem = () => {
-    var contentItem = this.state.content.map((item) =>
-      <div className="commentGrid" key={item.replyComments.id} >
-        <img
-          className="avatar"
-          src={item.replyComments.avatar}
-        />
-        {item.originComments == null &&
-          <div className="commentItem">
-            <span className="fromName">{item.replyComments.nickName}：</span>
-            <span className="content">{item.replyComments.content}</span>
-          </div>
-        }
-        {item.originComments != null &&
-          <div className="commentItem">
-            <span className="fromName">{item.replyComments.nickName}：</span>
-            <span className="content">{item.replyComments.content}</span>
-            <div className="reply">
-              <span className="fromName">@{item.originComments.nickName}：</span>
-              <span className="content">{item.originComments.content}</span>
+    if (this.state.content != null) {
+      var contentItem = this.state.content.map((item) =>
+        <div className="commentGrid" key={item.replyComments.id} >
+          <img
+            className="avatar"
+            src={item.replyComments.avatar}
+          />
+          {item.originComments == null &&
+            <div className="commentItem">
+              <span className="fromName">{item.replyComments.nickName}：</span>
+              <span className="content">{item.replyComments.content}</span>
             </div>
-          </div>
-        }
-        <div></div>
-        <p className="createTime">
-          {item.replyComments.createTime}
-        </p>
-      </div>
-    )
-    return contentItem;
+          }
+          {item.originComments != null &&
+            <div className="commentItem">
+              <span className="fromName">{item.replyComments.nickName}：</span>
+              <span className="content">{item.replyComments.content}</span>
+              <div className="reply">
+                <span className="fromName">@{item.originComments.nickName}：</span>
+                <span className="content">{item.originComments.content}</span>
+              </div>
+            </div>
+          }
+          <div></div>
+          <p className="createTime">
+            {item.replyComments.createTime}
+          </p>
+        </div>
+      )
+      return contentItem;
+    }
+    return <div>&nbsp;</div>
   }
 
   componentDidUpdate() {
@@ -61,17 +69,22 @@ class Comment extends React.Component {
     }
   }
 
-  getComment() {
-    getComments(['EGobzUjMY3sM3']).then(data => {
-      this.setState({ content: data.data })
-    })
+  getComment = (showId) => {
+    if (showId != null) {
+      var id = showId.replace("/", "")
+      getComments([id]).then(data => {
+        this.setState({ content: data.data })
+      })
+    }
+
   }
+
 
   render() {
     return (
       <div className="container" ref={this.ref}>
         <div className="main">
-          <EditComment />
+          <EditComment getComment={this.getComment} />
           {this.ContentItem()}
         </div>
       </div>
